@@ -1,5 +1,8 @@
-import Image from "next/image";
-
+import { UserButton } from "@clerk/nextjs";
 export default function Home() {
-    return <p className="text-red-900 font-bold">Hello twitch clone</p>;
+    return (
+        <div>
+            <UserButton afterSignOutUrl="/" />
+        </div>
+    );
 }
