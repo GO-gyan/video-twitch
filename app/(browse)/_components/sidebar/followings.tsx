@@ -5,7 +5,7 @@ import { Follow, User } from "@prisma/client";
 import UserItem, { UserItemSkeleton } from "./user-item";
 
 interface FollowingsProps {
-    data: (Follow & { following: User })[];
+    data: (Follow & { following: User & { stream: { isLive: boolean } | null } })[];
 }
 function Followings({ data }: FollowingsProps) {
     const { collapsed } = useSidebar((state) => state);
@@ -25,6 +25,7 @@ function Followings({ data }: FollowingsProps) {
                         key={follow.following.id}
                         username={follow.following.username}
                         imageUrl={follow.following.imageUrl}
+                        isLive={follow.following.stream?.isLive}
                     />
                 ))}
             </ul>
