@@ -7,8 +7,8 @@ import { LiveKitRoom } from "@livekit/components-react";
 import { cn } from "@/lib/utils";
 import { useChatSidebar } from "@/store/use-chat-sidebar";
 
-import Video from "./video";
-import Chat from "./chat";
+import Video, { VideoSkeleton } from "./video";
+import Chat, { ChatSkeleton } from "./chat";
 import ChatToggle from "./chat-toggle";
 
 interface StreamPlayerProps {
@@ -21,7 +21,7 @@ function StreamPlayer({ user, stream, isFollowing }: StreamPlayerProps) {
     const { collapsed } = useChatSidebar((state) => state);
 
     if (!token || !name || !identity) {
-        return null;
+        return <StreamPlayerSkeleton />;
     }
     return (
         <>
@@ -56,5 +56,18 @@ function StreamPlayer({ user, stream, isFollowing }: StreamPlayerProps) {
         </>
     );
 }
+
+export const StreamPlayerSkeleton = () => {
+    return (
+        <div className="grid grid-cols-1 lg:gap-y-0 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-6 h-full">
+            <div className="space-y-4 col-span-1 lg:col-span-2 xl:col-span-2 2xl:col-span-5 lg:overflow-y-auto hidden-scrollbar pb-10">
+                <VideoSkeleton />
+            </div>
+            <div className="col-span-1 bg-background">
+                <ChatSkeleton />
+            </div>
+        </div>
+    );
+};
 
 export default StreamPlayer;
