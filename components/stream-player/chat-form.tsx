@@ -50,7 +50,7 @@ function ChatForm({ value, onChange, onSubmit, isHidden, isFollowersOnly, isDela
                     onChange={(e) => onChange(e.target.value)}
                     disabled={isDisabled}
                     placeholder="Type your message"
-                    className={cn("border-white/10", isFollowersOnly && "rounded-t-none border-t-0")}
+                    className={cn("border-white/10", (isFollowersOnly || isDelayed) && "rounded-t-none border-t-0")}
                 />
             </div>
             <div className="ml-auto">
